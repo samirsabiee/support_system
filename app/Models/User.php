@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->morphMany(Reply::class, 'repliable');
     }
+
+    public function isAdmin(): bool
+    {
+        return $this instanceof Admin;
+    }
 }
