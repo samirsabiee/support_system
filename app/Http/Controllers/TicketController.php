@@ -49,4 +49,10 @@ class TicketController extends Controller
     {
         return view('tickets.ticket', compact('ticket'));
     }
+
+    public function close(Ticket $ticket)
+    {
+        $ticket->close();
+        return back();
+    }
 }
