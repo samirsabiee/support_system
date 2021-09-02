@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,3 +33,4 @@ Route::get('tickets/new', [TicketController::class, 'new'])->name('ticket.new');
 Route::post('tickets', [TicketController::class, 'create'])->name('ticket.create');
 Route::get('tickets', [TicketController::class, 'index'])->name('ticket.index');
 Route::get('tickets/{ticket}', [TicketController::class, 'show'])->name('ticket.show');
+Route::post('tickets/{ticket}/reply', [ReplyController::class, 'create'])->name('reply.create');
