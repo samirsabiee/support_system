@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -27,5 +28,10 @@ class Admin extends Authenticatable
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class, 'department', 'department');
+    }
+
+    public function replies(): MorphMany
+    {
+        return $this->morphMany(Reply::class, 'repliable');
     }
 }
