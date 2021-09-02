@@ -5,7 +5,11 @@
         <div class="card col-8 p-0 mb-3">
             <div class="card-header d-flex flex-row justify-content-between align-items-center">
                 <span>{{ $ticket->title }}</span>
-                <span class="btn btn-danger">Close</span>
+                @if($ticket->isClosed())
+                    <span class="btn btn-light">Closed</span>
+                @else
+                    <a href="{{ route('ticket.close', $ticket) }}" class="btn btn-danger">Close</a>
+                @endif
             </div>
             <div class="card-body">
                 <div class="card-text">{{ $ticket->text }}</div>
@@ -27,17 +31,19 @@
                 </div>
             </div>
         @endforeach
-        <form method="post" class="col-8 p-0" action="{{ route('reply.create', $ticket) }}">
-            <div class="form-group p-0">
-                @csrf
-                <textarea class="form-control w-100" placeholder="Enter Your Reply Text Here" aria-label="text"
-                          name="text"
-                          id="text"
-                          rows="10"></textarea>
+        @if(!$ticket->isClosed())
+            <form method="post" class="col-8 p-0" action="{{ route('reply.create', $ticket) }}">
+                <div class="form-group p-0">
+                    @csrf
+                    <textarea class="form-control w-100" placeholder="Enter Your Reply Text Here" aria-label="text"
+                              name="text"
+                              id="text"
+                              rows="10"></textarea>
 
-            </div>
-            <button type="submit" class="btn btn-primary">Reply</button>
-        </form>
+                </div>
+                <button type="submit" class="btn btn-primary">Reply</button>
+            </form>
+        @endif
 
     </div>
 
