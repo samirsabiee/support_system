@@ -20,4 +20,14 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getPriorityAttribute($value): string
+    {
+        return ['Low', 'Middle', 'High'][$value];
+    }
+
+    public function getStatusAttribute($value): string
+    {
+        return ['Open', 'Replied', 'Closed'][$value];
+    }
 }
