@@ -13,6 +13,10 @@ class Ticket extends Model
 {
     use HasFactory;
 
+    const TICKET_OPEN = 'Open';
+    const TICKET_REPLIED = 'Replied';
+    const TICKET_CLOSED = 'Closed';
+
     protected $fillable = ['title', 'text', 'department', 'file_path', 'priority'];
 
     protected $attributes = [
@@ -31,7 +35,7 @@ class Ticket extends Model
 
     public function getStatusAttribute($value): string
     {
-        return ['Open', 'Replied', 'Closed'][$value];
+        return [self::TICKET_OPEN, self::TICKET_REPLIED, self::TICKET_CLOSED][$value];
     }
 
     public function hasFile(): bool
@@ -49,5 +53,16 @@ class Ticket extends Model
     public function replies(): HasMany
     {
         return $this->hasMany(Reply::class);
+    }
+
+    public function isCreated(): bool
+    {
+        return $this->status === self::TICKET_OPEN;
+    }
+
+    public function replied()
+    {
+        $this->status = 1;
+        $this->save();
     }
 }
