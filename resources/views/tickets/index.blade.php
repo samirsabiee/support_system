@@ -15,7 +15,7 @@
             <tbody>
             @forelse($tickets as $ticket)
                 <tr>
-                    <td>{{ $ticket->title }}</td>
+                    <td><a href="{{ route('ticket.show', $ticket->id) }}">{{ $ticket->title }}</a></td>
                     <td>{{ $ticket->user->name }}</td>
                     <td>{{ $ticket->priority }}</td>
                     <td>{{ $ticket->status }}</td>
