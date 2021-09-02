@@ -65,4 +65,15 @@ class Ticket extends Model
         $this->status = 1;
         $this->save();
     }
+
+    public function close()
+    {
+        $this->status = 2;
+        $this->save();
+    }
+
+    public function isClosed(): bool
+    {
+        return $this->status === self::TICKET_CLOSED;
+    }
 }
