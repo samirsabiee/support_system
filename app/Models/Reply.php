@@ -10,6 +10,8 @@ class Reply extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['text', 'ticket_id'];
+
     public function repliable(): MorphTo
     {
         return $this->morphTo();
