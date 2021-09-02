@@ -14,7 +14,7 @@ class TicketController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:web');
+        $this->middleware('auth:web,admin');
     }
 
     public function new()
@@ -36,5 +36,11 @@ class TicketController extends Controller
             ? $request->file->store('public')
             : null;
 
+    }
+
+    public function index()
+    {
+        $tickets = auth()->user()->tickets;
+        return view('tickets.index', compact('tickets'));
     }
 }
