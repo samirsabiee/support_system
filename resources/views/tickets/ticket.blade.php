@@ -18,7 +18,7 @@
             </div>
         </div>
         @foreach($ticket->replies as $reply)
-            <div class="card">
+            <div class="col-8 card mb-3 p-0">
                 <div class="card-body">
                     <p class="card-text">{{ $reply->text }}</p>
                 </div>
@@ -27,11 +27,18 @@
                 </div>
             </div>
         @endforeach
-        <div class="col-8 form-group p-0">
-            <textarea class="form-control w-100" placeholder="Enter Your Reply Text Here" aria-label="text" id="text"
-                      rows="10"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Reply</button>
+        <form method="post" class="col-8 p-0" action="{{ route('reply.create', $ticket) }}">
+            <div class="form-group p-0">
+                @csrf
+                <textarea class="form-control w-100" placeholder="Enter Your Reply Text Here" aria-label="text"
+                          name="text"
+                          id="text"
+                          rows="10"></textarea>
+
+            </div>
+            <button type="submit" class="btn btn-primary">Reply</button>
+        </form>
 
     </div>
+
 @endsection
