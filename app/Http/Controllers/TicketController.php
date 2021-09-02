@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TicketRequest;
+use App\Models\Ticket;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -42,5 +43,10 @@ class TicketController extends Controller
     {
         $tickets = auth()->user()->tickets;
         return view('tickets.index', compact('tickets'));
+    }
+
+    public function show(Ticket $ticket)
+    {
+        return view('tickets.ticket', compact('ticket'));
     }
 }
